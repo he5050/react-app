@@ -16,6 +16,7 @@ const loadRouter = (router, app) => {
 const app = new Koa()
 
 loadMiddleware('./middleware/webpack', app)
+loadRouter(devStaticFileRouter, app)
 loadMiddleware('./middleware/static_file', app)
 loadMiddleware('./middleware/favicon', app)
 loadMiddleware('./middleware/bodyparser', app)
@@ -23,7 +24,6 @@ loadMiddleware('./middleware/ejs', app)
 loadMiddleware('./middleware/session', app)
 loadMiddleware('./middleware/client_type', app)
 
-loadRouter(devStaticFileRouter, app)
 loadRouter(homeRouter, app)
 loadRouter(baseRouter, app)
 loadMiddleware('./middleware/auth', app)
