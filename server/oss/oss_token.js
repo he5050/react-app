@@ -62,7 +62,7 @@ class OSSTokenApi {
                         res.success = false
                         res.data = [{}]
                     } else {
-                        CacheManger.Instance().set('ossToken', data, 60000 * 50) // 设置缓存超时为50分钟
+                        CacheManger.Instance().set('ossToken', data, 3600 * 50) // 设置缓存超时为50分钟
                         res.data = [
                             {
                                 ...data.Credentials
