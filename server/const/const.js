@@ -30,8 +30,8 @@ const UserType = {
 
 // 微信用户关注状态
 const WxSubscribeState = {
-    None: -1,
-    Not: 0,
-    Is: 1
+    None: -1, // 错误
+    Not: 0,  // 没有关注
+    Is: 1   // 关注
 }
 export {APPPrefix, UserType, TabColumnType, OperateType, WxSubscribeState}
