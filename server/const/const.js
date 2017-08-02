@@ -1,7 +1,8 @@
-// 本文件为常文件 主要用于存放一些常的数据
+// 本文件为常量文件
 
-const APPPrefix={
-    Session:'my_app'
+// 前缀
+const APPPrefix = {
+    Seesion: 'app_'
 }
 
 // 列表列类型
@@ -33,4 +34,4 @@ const WxSubscribeState = {
     Not: 0,
     Is: 1
 }
-export {APPPrefix,UserType, TabColumnType, OperateType, WxSubscribeState}
+export {APPPrefix, UserType, TabColumnType, OperateType, WxSubscribeState}
