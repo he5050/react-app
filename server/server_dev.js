@@ -3,7 +3,7 @@ import {proxyRouter} from "./routers/proxy"
 import {devStaticFileRouter} from "./middleware/dev_static_file"
 import {baseRouter} from ".routers/site"
 
-// 载入 基础设置
+// 载入 中间件基础设置
 const loadMiddleware = (path, app) => {
     require(path).default(app)
 }
@@ -16,18 +16,21 @@ const loadRouter = (router, app) => {
 const app = new Koa()
 
 loadMiddleware('./middleware/webpack', app)
-loadRouter(devStaticFileRouter, app)
+loadRouter('./middleware/dev_static_file', app)
+loadRouter('./routers/public_proxy', app)
 loadMiddleware('./middleware/static_file', app)
 loadMiddleware('./middleware/favicon', app)
 loadMiddleware('./middleware/bodyparser', app)
 loadMiddleware('./middleware/ejs', app)
 loadMiddleware('./middleware/session', app)
-loadMiddleware('./middleware/client_type', app)
+loadMiddleware('./middleware/attach', app)
 
-loadRouter(homeRouter, app)
-loadRouter(baseRouter, app)
+loadRouter('./routers/base', app)
+loadRouter('./routers/index', app)
 loadMiddleware('./middleware/auth', app)
-loadRouter(proxyRouter, app)
+loadRouter('./routers/proxy', app)
+loadRouter('./routers/system', app)
+
 
 
 var config = require('./config/index')

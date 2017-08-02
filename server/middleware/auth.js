@@ -3,7 +3,7 @@
  * 1.未登录，跳转到登录界面
  * 2.已登录，更新session过期时间
  */
-import {UserType} from "../role/role";
+import {UserType} from "../const/const";
 
 // 更新session失效时间
 const updateSessionExpires = async(ctx, next) => {
@@ -45,7 +45,7 @@ export default(app) => {
         if (ctx.url.startsWith('/api')) {
             ctx.body = {
                 success: false,
-                message: "好像访问出了点问题",
+                message: '',
                 data: ['/login'],
                 code: 302,
                 count: 0

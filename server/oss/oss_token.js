@@ -1,8 +1,12 @@
-// 获取oss token
+/**
+ * 获取oss token
+ */
 import ALY from "aliyun-sdk";
 import CacheManger from "../cache/cache_manger";
+import config from '../config/index'
 
 class OSSTokenApi {
+
     static Instance() {
         if (this.instance == null) {
             // 创建单例
@@ -14,12 +18,20 @@ class OSSTokenApi {
     constructor() {
         // 通过 https://github.com/aliyun-UED/oss-js-upload 生成的accessKeyId,secretAccessKey,roleARN
         // 生成用户,为用户选择角色,生成成功的时候回自动生成一个文件,里面就有accessKeyId,secretAccessKey  roleARN是在角色管理里面查看
-        this.sts = new ALY.STS({accessKeyId: '', secretAccessKey: '', endpoint: 'https://sts.aliyuncs.com', apiVersion: '2015-04-01'})
+        this.sts = new ALY.STS({
+            accessKeyId: config.aliyun_accessKeyId,
+            secretAccessKey: config.aliyun_secretAccessKey,
+            endpoint: config.aliyun_endpoint,
+            apiVersion: config.aliyun_apiVersion
+        })
     }
 
+    // 获取token
     getToken() {
         return new Promise((resolve, reject) => {
+            // 先判断缓存是否已存在ossToken
             let token = CacheManger.Instance().get('ossToken')
+            // 如果存在
             if (token !== null) {
                 let res = {
                     success: true,

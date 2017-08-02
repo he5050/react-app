@@ -15,16 +15,19 @@ const loadRouter = (router, app) => {
 const app = new koa()
 
 loadMiddleware('./middleware/static_file', app)
+loadRouter('./routers/public_proxy', app)
 loadMiddleware('./middleware/favicon', app)
 loadMiddleware('./middleware/bodyparser', app)
 loadMiddleware('./middleware/ejs', app)
 loadMiddleware('./middleware/session', app)
-loadMiddleware('./middleware/client_type', app)
+loadMiddleware('./middleware/attach', app)
 
-loadRouter(homeRouter, app)
-loadRouter(baseRouter, app)
+loadRouter('./routers/base', app)
+loadRouter('./routers/index', app)
 loadMiddleware('./middleware/auth', app)
-loadRouter(proxyRouter, app)
+loadRouter('./routers/proxy', app)
+loadRouter('./routers/system', app)
+
 
 
 var config = require('./config/index')

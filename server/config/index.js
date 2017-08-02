@@ -5,6 +5,12 @@ const config = {
     dev_hot_server_host: 'localhost', // 服务地址
     dev_hot_server_port: '9001', // 热更新
 
+    // 阿里云配置
+    aliyun_accessKeyId:'LTAIdRTvcQfp9VGq',
+    aliyun_secretAccessKey:'CBqaA881wYVBziEOV0mmURANsoAIeA',
+    aliyun_endpoint:'https://sts.aliyuncs.com',
+    aliyun_apiVersion:'2015-04-01'
+
     // 在进行以下配置的的时候请修改本的host文件 使用了rethink_db 做为缓存服务的数据库
     rethink_db_host: (process.env.NODE_ENV === 'production')
         ? '127.0.0.1'
