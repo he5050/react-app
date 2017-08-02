@@ -1,24 +1,28 @@
 import cache from './cache'
 
-export default class CacheManger{
-    construct(){
+export default class CacheManger {
+    construct() {
+        // 初始化缓存对象
         this.myCahce = cache.createCache()
     }
-    static Instance(){
-        if(this.instance == null){
+    // 定义 单例创建
+    static Instance() {
+        if (this.instance == null) {
             // 创建 单例
             this.instance = new CacheManger()
         }
         return this.instance
     }
-
-    get(key){
+    // 从缓存取值
+    get(key) {
         return this.myCahce.get(key)
     }
-    set(key,value,tiemOut){
-        this.myCahce.set(key,value,tiemOut)
+    // 写入缓存
+    set(key, value, tiemOut) {
+        this.myCahce.set(key, value, tiemOut)
     }
-    clear(){
+    // 清空缓存
+    clear() {
         this.myCahce.clear()
     }
 }

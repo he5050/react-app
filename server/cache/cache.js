@@ -1,4 +1,9 @@
-// 设置 缓存
+/**
+ * 设置 缓存
+ * @param {[type]} key    [缓存k键]
+ * @param {[type]} value  [缓存的值]
+ * @param {[type]} expire [缓存时间]
+ */
 const set = (key, value, expire) => {
     let _cache = this.cache
     // 如果已经存在该值,则重新赋值
@@ -38,7 +43,7 @@ const get = (key) => {
     }
 }
 
-// 清空session
+// 清空cache
 const clear = () => {
     this.cache = {}
 }
