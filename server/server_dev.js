@@ -28,7 +28,6 @@ loadRouter('./routers/base', app)
 loadRouter('./routers/index', app)
 loadMiddleware('./middleware/auth', app)
 loadRouter('./routers/proxy', app)
-loadRouter('./routers/system', app)
 
 var config = require('./config/index')
 

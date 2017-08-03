@@ -24,12 +24,14 @@ export default class ProxyManger {
                 code: 404,
                 count: 0
             }
+            // ctx.body 转成jsonstring对象
             let bodyString = new Buffer(JSON.stringify(body))
             // 请求头
             let headers = {
                 'Content-Type': 'application/json',
                 'Content-Length': bodyString.length
             }
+            // 判断是否有登录
             if (user) {
                 headers['Login-User'] = encodeURIComponent(JSON.stringify(user))
             }
@@ -43,7 +45,7 @@ export default class ProxyManger {
             }
             let req = http.request(options, (res) => {
                 res.setEncoding('utf8') // 设置编码格式
-                let chunks = ''
+                let chunks = '' // 请求区块
                 res.on('data', (chunk) => {
                     chunks += chunk
                 })
