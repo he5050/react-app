@@ -1,8 +1,5 @@
 import koa from "koa"
-import {proxyRouter} from "./routers/proxy"
-import {devStaticFileRouter} from "./middleware/dev_static_file"
-import {baseRouter} from ".routers/site"
-
+import logger from "koa-logger"
 // 载入 中间件基础设置
 const loadMiddleware = (path, app) => {
     require(path).default(app)
@@ -14,7 +11,9 @@ const loadRouter = (router, app) => {
 }
 
 const app = new Koa()
-
+// 设置 日志  后台打印日志
+app.use(convert(logger()))
+loadMiddleware('./middleware/logs', app)
 loadMiddleware('./middleware/webpack', app)
 loadRouter('./middleware/dev_static_file', app)
 loadRouter('./routers/public_proxy', app)
@@ -30,8 +29,6 @@ loadRouter('./routers/index', app)
 loadMiddleware('./middleware/auth', app)
 loadRouter('./routers/proxy', app)
 loadRouter('./routers/system', app)
-
-
 
 var config = require('./config/index')
 

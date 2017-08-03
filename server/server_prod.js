@@ -1,7 +1,8 @@
-import koa from "koa";
-import { baseRouter} from "./routers/site";
-import { proxyRouter } from "./routers/proxy";
-
+import koa from "koa"
+import logger from "koa-logger"
+import convert from "koa-convert"
+import { baseRouter} from "./routers/site"
+import { proxyRouter } from "./routers/proxy"
 // 载入 基础设置
 const loadMiddleware = (path, app) => {
   require(path).default(app)
@@ -27,6 +28,7 @@ loadRouter('./routers/index', app)
 loadMiddleware('./middleware/auth', app)
 loadRouter('./routers/proxy', app)
 loadRouter('./routers/system', app)
+
 
 
 

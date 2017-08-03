@@ -33,11 +33,13 @@ class OSSTokenApi {
             let token = CacheManger.Instance().get('ossToken')
             // 如果存在
             if (token !== null) {
+                // 设置返回结果
                 let res = {
                     success: true,
                     message: '',
                     count: 1
                 }
+                // 把验证的证书放入data当中
                 res.data = [
                     {
                         ...token.Credentials
@@ -45,24 +47,28 @@ class OSSTokenApi {
                 ]
                 resolve(res);
             } else {
+                // 如果不存在 则重新获取
                 this.sts.assumeRole({
                     // 指定角色的资源描述符；每个角色都有一个唯一的资源描述符(Arn)，您可以在RAM的角色管理中查看一个角色的Arn
-                    RoleArn: 'acs:ram::1712472832694546:role/wh-oss-role',
+                    RoleArn: config.aliyun_RoleArn,
                     // 此参数用来区分不同的Token，以标明谁在使用此Token，便于审计;
-                    RoleSessionName: 'wh-oss-role',
+                    RoleSessionName: config.aliyun_RoleSessionName,
                     // 过期时间,秒
-                    DurationSeconds: 3600
+                    DurationSeconds: config.aliyun_DurationSeconds
                 }, (err, data) => {
+                    // 设置返回结果
                     let res = {
                         success: true,
                         message: '',
                         count: 1
                     }
+                    // 判断是否获取成功
                     if (err) {
                         res.success = false
                         res.data = [{}]
                     } else {
-                        CacheManger.Instance().set('ossToken', data, 3600 * 50) // 设置缓存超时为50分钟
+                        CacheManger.Instance().set('ossToken', data, 60000 * 50) // 设置缓存超时为50分钟
+                        // 保存验证信息
                         res.data = [
                             {
                                 ...data.Credentials

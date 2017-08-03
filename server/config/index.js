@@ -6,10 +6,13 @@ const config = {
     dev_hot_server_port: '9001', // 热更新
 
     // 阿里云配置
-    aliyun_accessKeyId:'LTAIdRTvcQfp9VGq',
-    aliyun_secretAccessKey:'CBqaA881wYVBziEOV0mmURANsoAIeA',
-    aliyun_endpoint:'https://sts.aliyuncs.com',
-    aliyun_apiVersion:'2015-04-01'
+    aliyun_accessKeyId:'LTAILOVkN3L96mbc', // id
+    aliyun_secretAccessKey:'xOsdi5CxXeLx4yLJQXAGyNAu6VWerZ', // key
+    aliyun_endpoint:'https://sts.aliyuncs.com', // 地址
+    aliyun_apiVersion:'2015-04-01',  //API 日期
+    aliyun_RoleArn:'acs:ram::1788827529091820:role/oss-dmin', // 角色的REM
+    aliyun_RoleSessionName:'oss-dmin', // 角色的session名
+    aliyun_DurationSeconds: 3600, // 过期时间
 
     // 在进行以下配置的的时候请修改本的host文件 使用了rethink_db 做为缓存服务的数据库
     rethink_db_host: (process.env.NODE_ENV === 'production')
@@ -21,7 +24,7 @@ const config = {
     // API 服务器的地址与端口
     api_host: (process.env.NODE_ENV === 'production')
         ? '127.0.0.1'
-        : 'api',
+        : 'apiHost',
     api_port: (process.env.NODE_ENV === 'production')
         ? '8000'
         : '8000',
