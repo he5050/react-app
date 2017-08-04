@@ -1,5 +1,3 @@
-
-
 import fetch from "isomorphic-fetch";
 
 const Method = {
@@ -21,7 +19,7 @@ export class NetApi {
             credentials: 'same-origin',
             mode: 'cors',
             cache: 'default'
-        };
+        }
         return fetch(url, init).then(res => res.json()).then(j => {
             if (!j.success && j.code === 302) {
                 window.location.href = j.data[0]
