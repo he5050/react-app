@@ -1,28 +1,41 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!--favicon.ico-->
     <link rel="icon" href="" type="image/x-icon">
-    <title><%- title %></title>
+    <title>
+        <%- title %>
+    </title>
 
     <!--脚本,第三方css文件-->
     <% include head.ejs %>
 
-    <!--css文件-->
-    <link rel="stylesheet" href=<%= '/static/css/app.min.css?ver='+version %> />
-    <link rel="stylesheet" href=<%= '/static/css/'+templateName+'.min.css?ver='+version %> />
-    <!--第三方公共库合并引用-->
-    <script src=<%= '/static/js/third.js?ver='+version %> ></script>
-    <script src=<%= '/static/js/chunk.js?ver='+version %> ></script>
+        <!--css文件-->
+        <link rel="stylesheet" href=<%='/static/css/app.min.css?ver=' +version %> />
+        <link rel="stylesheet" href=<%='/static/css/' +templateName+ '.min.css?ver='+version %> />
+        <!--第三方公共库合并引用-->
+        <script src=<%='/static/js/third.js?ver=' +version %>
+            >
+        </script>
+        <script src=<%='/static/js/chunk.js?ver=' +version %>
+            >
+        </script>
 </head>
+
 <body>
-    <div id="J_Main" class="adaption-auto"><%- markup %></div>
+    <div id="J_Main" class="adaption-auto">
+        <%- markup %>
+    </div>
     <!--页面传值,用于服务器往客户端页面传值-->
-    <div id='J_Matrix' data-init-state=<%= initState %> ></div>
+    <div id='J_Matrix' data-init-state=<%=i nitState %> ></div>
     <!--引用页面脚本文件-->
-    <script src=<%= '/static/js/'+templateName+'.js?ver='+version %> charset="utf-8" ></script>
+    <script src=<%='/static/js/' +templateName+ '.js?ver='+version %>
+        charset = "utf-8" >
+    </script>
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 <!--验证浏览器是否支持-->
 <script type="text/javascript">
-
+    // 获取用户使用系统
     function getOSType() {
         if (/(Android)/i.test(navigator.userAgent)) {
             return 0;
@@ -12,61 +12,57 @@
     }
 
     //js判断当前环境是否是微信环境
-    function is_weixin(){
+    function is_weixin() {
         var ua = navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
             return true;
         } else {
             return false;
         }
     }
 
-    function getBrowserInfo()
-    {
-        var agent = navigator.userAgent.toLowerCase() ;
-        var regStr_ie = /msie [\d.]+;/gi ;
+    // 获取浏览器的信息
+    function getBrowserInfo() {
+        var agent = navigator.userAgent.toLowerCase();
+        var regStr_ie = /msie [\d.]+;/gi;
         var regStr_ff = /firefox\/[\d.]+/gi
-        var regStr_chrome = /chrome\/[\d.]+/gi ;
-        var regStr_saf = /safari\/[\d.]+/gi ;
+        var regStr_chrome = /chrome\/[\d.]+/gi;
+        var regStr_saf = /safari\/[\d.]+/gi;
         // IE
-        if(agent.indexOf("msie") > 0)
-        {
+        if (agent.indexOf("msie") > 0) {
             return agent.match(regStr_ie);
         }
         // firefox
-        if(agent.indexOf("firefox") > 0)
-        {
+        if (agent.indexOf("firefox") > 0) {
             return agent.match(regStr_ff);
         }
         // Chrome
-        if(agent.indexOf("chrome") > 0)
-        {
+        if (agent.indexOf("chrome") > 0) {
             return agent.match(regStr_chrome);
         }
         // Safari
-        if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0)
-        {
+        if (agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0) {
             return agent.match(regStr_saf);
         }
         return ""
     }
-    (function(){
-        var browser = getBrowserInfo() ;
-        var verInfo = (browser+"").replace(/[^0-9.]/ig,"");
-        if ((browser+"").indexOf("msie") >= 0) {
+    (function() {
+        var browser = getBrowserInfo();
+        var verInfo = (browser + "").replace(/[^0-9.]/ig, "");
+        if ((browser + "").indexOf("msie") >= 0) {
             if (parseFloat(verInfo) < 10.0) {
                 window.onload = function() {
                     var lowestSupportedIEVersion = 10;
                     var el = document.createElement('div'),
-                            elStyle = el.style,
-                            docBody = document.getElementsByTagName('body')[0],
-                            linkStyle = 'color:#06F;text-decoration: underline;';
-                    el.innerHTML =	'尊敬的用户：<br />'+
-                            '您的Internet Explorer浏览器版本太低。为了让你得到最佳的体验效果，访问本网站需要安装Internet Explorer更新版本的浏览器，'+
-                            '请<a href="//windows.microsoft.com/zh-cn/internet-explorer/download-ie" style="'+linkStyle+'" target="_blank">下载安装IE' + lowestSupportedIEVersion + '</a>（或更新）。'+
-                            '也可以在其他浏览器，'+
-                            '如<a href="//www.google.com/intl/zh-CN/chrome/" style="'+linkStyle+'" target="_blank">Chrome</a>'+
-                            '或<a href="//www.firefox.com.cn/download/" style="'+linkStyle+'" target="_blank">Firefox</a>火狐中打开本网站。';
+                        elStyle = el.style,
+                        docBody = document.getElementsByTagName('body')[0],
+                        linkStyle = 'color:#06F;text-decoration: underline;';
+                    el.innerHTML = '尊敬的用户：<br />' +
+                        '您的Internet Explorer浏览器版本太低。为了让你得到最佳的体验效果，访问本网站需要安装Internet Explorer更新版本的浏览器，' +
+                        '请<a href="//windows.microsoft.com/zh-cn/internet-explorer/download-ie" style="' + linkStyle + '" target="_blank">下载安装IE' + lowestSupportedIEVersion + '</a>（或更新）。' +
+                        '也可以在其他浏览器，' +
+                        '如<a href="//www.google.com/intl/zh-CN/chrome/" style="' + linkStyle + '" target="_blank">Chrome</a>' +
+                        '或<a href="//www.firefox.com.cn/download/" style="' + linkStyle + '" target="_blank">Firefox</a>火狐中打开本网站。';
                     // elStyle.width = '100%';
                     elStyle.width = '720px';
                     elStyle.color = '#000';
@@ -84,58 +80,65 @@
     }());
 </script>
 
+<%# 引用阿里与antd%>
 <link rel="stylesheet" href="//at.alicdn.com/t/font_qgyimmrtz67uv7vi.css">
 <link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/antd/2.10.0/antd.min.css'>
 
 <!--手机上禁止字体放大-->
 <script type="text/javascript">
-  (function() {
-    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
-      handleFontSize();
-    } else {
-      if (document.addEventListener) {
-        document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
-      } else if (document.attachEvent) {
-        document.attachEvent("WeixinJSBridgeReady", handleFontSize);
-        document.attachEvent("onWeixinJSBridgeReady", handleFontSize);  }
-    }
-    function handleFontSize() {
-      // 设置网页字体为默认大小
-      WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
-      // 重写设置网页字体大小的事件
-      WeixinJSBridge.on('menu:setfont', function() {
-        WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
-      });
-    }
-  })();
+    (function() {
+        if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+            handleFontSize();
+        } else {
+            if (document.addEventListener) {
+                document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+            } else if (document.attachEvent) {
+                document.attachEvent("WeixinJSBridgeReady", handleFontSize);
+                document.attachEvent("onWeixinJSBridgeReady", handleFontSize);
+            }
+        }
+
+        function handleFontSize() {
+            // 设置网页字体为默认大小
+            WeixinJSBridge.invoke('setFontSizeCallback', {
+                'fontSize': 0
+            });
+            // 重写设置网页字体大小的事件
+            WeixinJSBridge.on('menu:setfont', function() {
+                WeixinJSBridge.invoke('setFontSizeCallback', {
+                    'fontSize': 0
+                });
+            });
+        }
+    })();
 </script>
 
-<% if (templateName === 'system' || templateName === 'retoucher' || templateName === 'merchant' || templateName === 'home') {%>
+<% if (templateName === 'index' || templateName === 'system') {%>
     <!--阿里云oss库引用-->
     <script src="//gosspublic.alicdn.com/aliyun-oss-sdk-4.7.3.min.js" type="text/javascript" charset="utf-8"></script>
-<%}%>
+    <%}%>
 
-<% if (templateName === 'photo_live') {%>
-    <!--微信JSSDK引用-->
-    <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
-<%}%>
+        <% if (templateName === 'photo_live') {%>
+            <!--微信JSSDK引用-->
+            <script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+            <%}%>
 
-<!--&lt;!&ndash;百度地图API库引用&ndash;&gt;-->
-<!--<script src="//api.map.baidu.com/api?v=2.0&ak=AzitIIsmKbAnwlppPtW8sXls" type="text/javascript" charset="utf-8"></script>-->
+                <!--&lt;!&ndash;百度地图API库引用&ndash;&gt;-->
+                <!--<script src="//api.map.baidu.com/api?v=2.0&ak=AzitIIsmKbAnwlppPtW8sXls" type="text/javascript" charset="utf-8"></script>-->
 
-<!--&lt;!&ndash;视频播放库引用&ndash;&gt;-->
-<!--<script type="text/javascript" src="/static/third/ckplayer/ckplayer.js" charset="utf-8"></script>-->
+                <!--&lt;!&ndash;视频播放库引用&ndash;&gt;-->
+                <!--<script type="text/javascript" src="/static/third/ckplayer/ckplayer.js" charset="utf-8"></script>-->
 
-<!--&lt;!&ndash;lightGallery库引用&ndash;&gt;-->
-<!--<link href="/static/third/lightGallery/css/lightgallery.css" rel="stylesheet">-->
-<!--<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lightgallery.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-autoplay.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-fullscreen.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-hash.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-pager.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-thumbnail.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-video.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-zoom.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/lib/picturefill.min.js" charset="utf-8"></script>-->
-<!--<script type="text/javascript" src="/static/third/lightGallery/lib/jquery.mousewheel.min.js" charset="utf-8"></script>-->
+                <!--&lt;!&ndash;lightGallery库引用&ndash;&gt;-->
+                <!--<link href="/static/third/lightGallery/css/lightgallery.css" rel="stylesheet">-->
+                <!--<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lightgallery.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-autoplay.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-fullscreen.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-hash.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-pager.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-thumbnail.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-video.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/js/lg-zoom.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/lib/picturefill.min.js" charset="utf-8"></script>-->
+                <!--<script type="text/javascript" src="/static/third/lightGallery/lib/jquery.mousewheel.min.js" charset="utf-8"></script>-->
