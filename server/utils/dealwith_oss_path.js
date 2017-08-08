@@ -3,11 +3,11 @@ import util from "./util"
 
 const ossUrl = 'jsbn-image.oss-cn-shenzhen.aliyuncs.com'
 const OssConfig = {
-    region: 'oss-cn-shenzhen',
-    bucket: 'jsbn-image',
+    region: 'oss-cn-shenzhen', //  地区
+    bucket: 'jsbn-image',  //  空间
     bucketTest: 'test-image',
-    hostUrl: '//' + ossUrl,
-    baseDir: 'app'
+    hostUrl: '//' + ossUrl, // 地址
+    baseDir: 'app' // 基础路径
 }
 // 小图标样式
 export const thumb120 = '?x-oss-process=image/resize,m_fill,w_120,limit_0/auto-orient,0/quality,q_90'
