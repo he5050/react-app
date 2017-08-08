@@ -52,14 +52,15 @@ const registerRouters = (mb) => {
                 return
             }
             return (
-                /*判断是否为跳转*/
                 <Route
                     strict={p.strict}
                     path={p.path}
                     component={(props) => {
                     if (p.redirect) {
+                        /*判断是否为跳转*/
                         return (<Redirect to={{...p.redirect }}/>)
                     } else if (p.key) {
+                        /*如果key存在 刚滚动到上次浏览的位置*/
                         return (
                             <ScrollTool pageKey={p.key}>{p.render(props)}</ScrollTool>
                         )
