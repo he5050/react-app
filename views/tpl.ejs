@@ -27,11 +27,11 @@
 </head>
 
 <body>
-    <div id="J_Main" class="adaption-auto">
+    <div id="J_Client" class="adaption-auto">
         <%- markup %>
     </div>
     <!--页面传值,用于服务器往客户端页面传值-->
-    <div id='J_Matrix' data-init-state=<%=i nitState %> ></div>
+    <div id='J_Server' data-init-state=<%=i nitState %> ></div>
     <!--引用页面脚本文件-->
     <script src=<%='/static/js/' +templateName+ '.js?ver='+version %>
         charset = "utf-8" >
