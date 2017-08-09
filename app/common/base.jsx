@@ -79,7 +79,7 @@ export const BaseListPageComponent = (name = '未知') => class extends React.Co
     // 显示 警告信息
     showHint() {
         const {
-            fetchFlg = false, // 判断是否查询完成
+            fetchFlg = false, // 判断是否加载完成 主要用于spin 组建的使用
             errMsg = ''
         } = this.props.list
         // 如果查询完成 则直接返回 跳出
@@ -100,12 +100,13 @@ export const BaseListPageComponent = (name = '未知') => class extends React.Co
     }
     /**
      * [onTableFilterChange description]
-     * @param  {[type]} pagination [description]
-     * @param  {[type]} filters    [description]
-     * @param  {[type]} sorter     [description]
+     * @param  {Object} pagination [分页的]
+     * @param  {String} filters    [查询的内容]
+     * @param  {[type]} sorter     [排序]
      * @return {[type]}            [description]
      */
     onTableFilterChange = (pagination, filters, sorter) => {
+        // 获取当前的页码
         let p = {
             pageIndex: pagination.current
         }
@@ -114,6 +115,7 @@ export const BaseListPageComponent = (name = '未知') => class extends React.Co
             p[k] = v[0]
         })
 
+        // 查询列表
         this.props.fetchList(p)
     }
 
