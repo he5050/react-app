@@ -1,8 +1,8 @@
 /**
  * 创建Store
  */
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import thunkMiddleware from "redux-thunk";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux"
+import thunkMiddleware from "redux-thunk"
 
 // 用于开发模式 的日志打印
 const logger = store => next => action => {
@@ -62,7 +62,7 @@ const structureStore = (params, initialState, asyncReducers) => {
         }
     }
     // state rethink当中
-    middleware.push(thunkMiddleware);
+    middleware.push(thunkMiddleware)
 
     let store = {}
 
@@ -70,12 +70,12 @@ const structureStore = (params, initialState, asyncReducers) => {
     // compose 方法主要用于 从右向左组合多个函数, compose(f, g, h)会返回(...args) => f(g(h(...args)))
     // applyMiddleware 调度中间件来增强store，例如中间件redux-thunk等
     if (initialState) {
-        store = createStore(makeRootReducer(asyncReducers), initialState, compose(applyMiddleware(...middleware), ...enhancers));
+        store = createStore(makeRootReducer(asyncReducers), initialState, compose(applyMiddleware(...middleware), ...enhancers))
     } else {
-        store = createStore(makeRootReducer(asyncReducers), compose(applyMiddleware(...middleware), ...enhancers));
+        store = createStore(makeRootReducer(asyncReducers), compose(applyMiddleware(...middleware), ...enhancers))
     }
 
-    return store;
-};
+    return store
+}
 
 export default structureStore
