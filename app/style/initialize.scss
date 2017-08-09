@@ -1,0 +1,41 @@
+//初始化
+$default-font-weight:normal;
+
+body,div,ul,dl,li,ol,h1,h2,h3,h4,h5,h6,dt,dd,img,a,span,p,table,td,i,input,button,textarea,form
+{padding:0;margin:0;border:none;font-weight: $default-font-weight;}
+a,span,p,font,b,i,strong{font-size:inherit;font-weight: $default-font-weight;}
+em{font-style:$default-font-weight;}
+i{font-style:$default-font-weight;}
+
+ul,li,dl,dt,dd,ol{list-style:none;}
+a{color:#333;text-decoration:none;}
+img{max-height: 100%;max-width: 100%};
+button{background-color: transparent;}
+a:link { text-decoration: none;}
+a:active { text-decoration:blink}
+a:hover { text-decoration:none;}
+a:visited { text-decoration: none;}
+body{
+  color: #555;
+  letter-spacing: 0.04em;
+  font:12px/1.5 "SF Pro SC","SF Pro Text","SF Pro Icons","PingFang SC","Helvetica Neue","Helvetica","Arial",sans-serif;
+  ////强制不换行
+  //white-space:nowrap;
+  //自动换行：
+  word-wrap:break-word; word-break:normal;
+  ////强制英文单词断行
+  //word-break:break-all;
+
+  //限制微信ios版本设置字体放大
+  -webkit-text-size-adjust: 100% !important;
+}
+html{
+  -webkit-overflow-scrolling: auto;
+}
+*{
+  outline:none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select:auto;
+  -moz-user-select:text;
+}

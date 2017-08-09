@@ -1,0 +1,116 @@
+.ant-modal{
+  &.model-large-img{
+    display: table;
+    .ant-modal-body{
+      padding: 0;
+    }
+    .ant-confirm-body{
+      .ant-confirm-content{
+        display: block;
+        width: 100%;
+        margin: 0;
+      }
+    }
+    .ant-confirm-btns{
+      display: none;
+    }
+  }
+  //手机端打开图片
+  &.mobile-model-large-img{
+    display: table;
+    .ant-modal-content{
+      box-shadow:none;
+    }
+    .ant-modal-body{
+      padding: 0;
+      position: relative;
+      .ant-confirm-body{
+
+      }
+      .ant-confirm-btns{
+        margin-top: 10px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .ant-confirm-body{
+
+      .ant-confirm-content{
+        display: block;
+        width: 100%;
+        margin: 0;
+      }
+
+    }
+    .photo-box{
+      height: calc(100vh - 90px);
+      width: 100%;
+      min-width: 260px;
+      min-height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .ant-modal-content{
+      background-color: transparent;
+    }
+  }
+
+  //手机弹出框
+  &.wap-modal-msg{
+    display: table;
+    .ant-modal-content{
+      //width: calc(100vw - 40px);
+    }
+    .ant-modal-body{
+      padding: 20px 30px;
+    }
+    .ant-confirm-body{
+      >.anticon{
+        display: none;
+      }
+      .ant-confirm-title{
+        display: block;
+        padding-bottom: 20px;
+      }
+      .ant-confirm-content{
+        display: block;
+        width: 100%;
+        margin: 0;
+      }
+    }
+    .ant-confirm-btns{
+      float: none;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 20px;
+      >button{
+        min-width: 80px;
+      }
+    }
+  }
+
+}
+
+
+.ant-modal-wrap{
+  text-align: center;
+  white-space: nowrap;
+  .ant-modal{
+    display: inline-block;
+    vertical-align: middle;
+    top: 0;
+    text-align: left;
+  }
+  &:before{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+}

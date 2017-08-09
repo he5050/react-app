@@ -1,0 +1,54 @@
+@import "../mixes";
+
+
+
+.ant-table-wrapper{
+  .ant-table{
+    tbody{
+      td{
+        &.img-column{
+          padding:0;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .ant-pagination{
+
+  }
+
+  .ant-table-title{
+    padding: 8px 0;
+  }
+  //头部标题和按钮
+  .table-title-box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:before{
+      content: "";
+      order: 3;
+      flex: 1;
+    }
+    >.title-box{
+      order: 1;
+    }
+    >*{
+      order: 4;
+    }
+    >.ant-btn-group{
+      order: 6;
+    }
+  }
+}
+//自定义筛选-搜索筛选样式
+.custom-filter-dropdown {
+  padding: 8px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+  input{
+    width: 130px;
+    margin-right: 8px;
+  }
+}

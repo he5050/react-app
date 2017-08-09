@@ -1,0 +1,17 @@
+//全局方法和变量
+@import "mixes";
+@import "initialize";
+
+
+@import "public/public";
+
+//主布局样式和主菜单样式
+@import "public/table"; //弹出框样式
+@import "public/modal"; //表格
+@import "public/form"; //下拉弹出框
+@import "public/dropdown"; //上传图片
+@import "public/upload"; //加载动画
+@import "public/spin.scss";
+@import "public/atnd.scss";
+
+

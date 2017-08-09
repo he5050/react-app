@@ -1,0 +1,43 @@
+
+
+// 伪类 居中
+@mixin inlineMiddle(){
+  &:after{
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+  }
+}
+//绝对定位垂直水平居中
+@mixin absoluteCenter($width,$height){
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin: {
+    top:-($height/2);
+    left: -($width/2);
+    right: 0;
+    bottom: 0;
+  };
+}
+
+//绝对定位水平居中
+@mixin absoluteHorizontalCenter($width){
+  position: absolute;
+  left:50%;
+  margin: {
+    left: -($width/2);
+    right: 0;
+  };
+}
+//绝对定位垂直居中
+@mixin absoluteVerticalCenter($height){
+  position: absolute;
+  top:50%;
+  margin: {
+    top:-($height/2);
+    bottom: 0;
+  };
+}

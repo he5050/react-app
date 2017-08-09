@@ -1,0 +1,190 @@
+// /**
+//  * @param $item-w 元素宽
+//  * @param $padding 内边距
+//  * @param $photo-scale 图片长宽比例
+//  * @param $info-w 信息条的宽度
+//  * @param $item-h 元素的高
+//  * @param $item-border-w 元素边框宽
+//  **/
+@mixin itemInfoDirection-row($item-w,$padding:0,$photo-scale:0,$info-w:0,$item-h:0,$item-border-w:0) {
+     @if($item-h > 0){
+        height: $item-h;
+    }
+    @include clearfix();
+
+    .info-box,
+    .photo-box {
+        float: left;
+    }
+    @if($photo-scale > 0 ) {
+        $photo-w: 0;
+        $photo-h: 0;
+        @if ($info-w > 0 ) {
+            $photo-w: $item-w - $info-w - $padding * 2 - $item-border-w * 2;
+            $photo-h: $photo-w * $photo-scale;
+
+            .photo-box {
+                width: $photo-w;
+                height: $photo-h;
+            }
+            @if($info-w > 0 ) {
+                .info-box {
+                    width: $info-w;
+                    height: $photo-h;
+                }
+            }
+        }
+        @else if($item-h>0) {
+            $photo-h: $item-h - $padding * 2 - $item-border-w * 2;
+            $photo-w: $photo-h / $photo-scale;
+
+            .photo-box {
+                width: $photo-w;
+                height: $photo-h;
+            }
+
+            .info-box {
+                width: ($item-w - ($item-h / $photo-scale) - $padding * 2);
+                height: $photo-h;
+            }
+        }
+    }
+}
+// /**
+//  * 列
+//  * @param $item-w 元素宽
+//  * @param $padding 内边距
+//  * @param $photo-scale 图片长宽比例
+//  * @param $info-w 信息条的宽度
+//  * @param $item-h 元素的高
+//  * @param $item-border-w 元素边框宽
+//  */
+@mixin itemInfoDirection-colum($item-w,$padding:0,$photo-scale:0,$info-h:0,$item-h:0,$item-border-w:0) {
+     @if($item-h > 0){
+        height: $item-h;
+    }
+    @if($photo-scale > 0 ) {
+        $photo-w: $item-w - $padding * 2 - $item-border-w * 2;
+        $photo-h: $photo-w * $photo-scale;
+
+        .photo-box {
+            width: $photo-w;
+            height: $photo-h;
+        }
+    }
+    @if($info-h > 0 ) {
+        .info-box {
+            height: $info-h;
+        }
+    }
+}
+//web
+// /**
+//  * 列表
+//  * @param $width 宽,默认为屏幕宽度
+//  * @param $colum  列数
+//  * @param $space 列之间的距离
+//  * @param $padding li 内边距
+//  * @param $margin ul 内边距
+//  * @param $photo-scale 图片比例
+//  * @param $info-size 信息尺寸
+//  * @param $item-h 元素高
+//  * @param $item-border-w 元素边框大小
+//  * @param $infoDirectionColum bool 横向还是竖向
+//  */
+@mixin list( $width, $colum:2, $space:0, $padding:0, $margin:0, $photo-scale:0, $info-size:0, $item-h:0, $item-border-w:0, $infoDirectionColum:true ) {
+     @include clearfix();
+    width: $width;
+    margin: 0 auto;
+    //设置内边距
+    @if ($margin >0) {
+        padding: $margin;
+    }
+    $item-w: (($width - ($margin * 2) - ($colum * $space - $space))/$colum);
+
+    > li {
+        float: left;
+        @if($space > 0) {
+            margin-left: $space;
+
+            &:nth-of-type(#{$colum}n + 1) {
+                margin-left: 0;
+            }
+
+            &:nth-of-type(n + #{$colum + 1}) {
+                margin-top: $space;
+            }
+        }
+        //设置内边距
+        @if($padding) {
+            padding: $padding;
+        }
+        width: $item-w;
+        //设置li 的布局以及photo-box 的大小
+        @if($infoDirectionColum) {
+             @include itemInfoDirection-colum( $item-w:$item-w, $padding:$padding, $photo-scale:$photo-scale, $info-h:$info-size, $item-h:$item-h, $item-border-w:$item-border-w );
+        }
+        @else {
+             @include itemInfoDirection-row( $item-w:$item-w, $padding:$padding, $photo-scale:$photo-scale, $info-w:$info-size, $item-h:$item-h, $item-border-w:$item-border-w );
+        }
+    }
+}
+
+// /**
+//  * wap-list
+//  * @param $colum 每行元素个数
+//  * @param $space 元素之间的空隙
+//  * @param $margin
+//  * @param $photo-scale 照片比例
+//  * @param @border-w 边线宽度
+//  * @param $padding 外层元素的内边距
+//  */
+@mixin wap-list( $max-width-differ:0, $colum:2, $space:0, $padding:0, $margin:0, $photo-scale:0, $info-size:0, $item-h:0, $border-w:0, $infoDirectionColum:true) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    @if ($margin >0) {
+        padding: $margin;
+    }
+
+    > li {
+        //float: left;
+        @if($space > 0) {
+             @if($colum > 1){
+                margin-left: $space;
+
+                &:nth-of-type(#{$colum}n + 1) {
+                    margin-left: 0;
+                }
+            }
+
+            &:nth-of-type(n + #{$colum + 1}) {
+                margin-top: $space;
+            }
+            @if($colum == 1) {
+                width: 100%;
+            }
+            @else {
+                width: calc( (100% /#{$colum}) - #{$space*($colum - 1)/$colum});
+            }
+        }
+        @else {
+            width: (100% /$colum);
+        }
+        @if($padding > 0) {
+            padding: $padding;
+        }
+
+        .photo-box {
+            $value: ($space * ($colum - 1)/$colum + $padding*2 + $border-w * 2);
+            height: calc( ((100vw - #{($max-width-differ + $margin * 2) + 0px}) / #{$colum} - #{$value + 0px} )*#{$photo-scale});
+        }
+        @if($info-size>0) {
+            .info-box {
+                height: $info-size;
+            }
+        }
+    }
+}
+

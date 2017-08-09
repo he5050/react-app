@@ -1,0 +1,14 @@
+//变量
+@import "variable";
+
+@import "mixins/background-variant";
+@import "mixins/border-radius";
+@import "mixins/clearfix";
+@import "mixins/gradients";
+@import "mixins/size";
+@import "mixins/vendor-prefixes";
+@import "mixins/list";
+@import "mixins/middle";
+
+
+@import "public-minins/main-layout.scss";

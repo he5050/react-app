@@ -1,6 +1,3 @@
-/**
- * 用于获取微信token
- */
 import CacheManger from "../cache/cache_manger";
 import ProxyManger from "../proxy/proxy_manger";
 
@@ -13,14 +10,10 @@ class WXTokenApi {
         return this.instance
     }
 
-    constructor() {
-        console.log('正在获取wx token');
-    }
+    constructor() {}
 
-    // 获取token的方法
     getToken(appId, appSecret) {
         return new Promise((resolve, reject) => {
-            // 判断是否有获取过token
             let token = CacheManger.Instance().get(`${appId}_${appSecret}_wxToken`)
             if (token !== null) {
                 let res = {
@@ -46,25 +39,28 @@ class WXTokenApi {
                         count: 1,
                         data: [{}]
                     }
-
                     if (err) {
                         res.message = "错误"
                         res.success = false
                     } else {
-                        // 判断调用是否出错
-                        if (data.errcode) {
-                            // 出错了
-                            res.message = data.errmsg
+                        if (!data.success) {
+                            res.message = data.message
                             res.success = false
                         } else {
-                            // 超时时间设定为微信返回的3/4
-                            data.expires_in = (data.expires_in) * (3 / 4) * 1000
-                            CacheManger.Instance().set(`${appId}_${appSecret}_wxToken`, data, data.expires_in)
-                            res.data = [
-                                {
-                                    ...data
-                                }
-                            ]
+                            // 判断调用是否出错
+                            if (data.data.errcode) {
+                                // 出错了
+                                res.message = data.errmsg
+                                res.success = false
+                            } else {
+                                data.data.expires_in = parseInt((data.data.expires_in) * (5 / 6) * 1000)
+                                CacheManger.Instance().set(`${appId}_${appSecret}_wxToken`, data.data, data.data.expires_in)
+                                res.data = [
+                                    {
+                                        ...data.data
+                                    }
+                                ]
+                            }
                         }
                     }
                     resolve(res)
@@ -73,7 +69,6 @@ class WXTokenApi {
         })
     }
 
-    // 获取用户的openid
     getOpenId(appId, appSecret, code) {
         return new Promise((resolve, reject) => {
             ProxyManger.getInstance().HttpsGet({
@@ -91,17 +86,22 @@ class WXTokenApi {
                     res.message = "错误"
                     res.success = false
                 } else {
-                    // 判断调用是否出错
-                    if (data.errcode) {
-                        // 出错了
-                        res.message = data.errmsg
+                    if (!data.success) {
+                        res.message = data.message
                         res.success = false
                     } else {
-                        res.data = [
-                            {
-                                ...data
-                            }
-                        ]
+                        // 判断调用是否出错
+                        if (data.data.errcode) {
+                            // 出错了
+                            res.message = `openid获取失败${data.data.errcode}:${data.data.errmsg}`
+                            res.success = false
+                        } else {
+                            res.data = [
+                                {
+                                    ...data.data
+                                }
+                            ]
+                        }
                     }
                 }
                 resolve(res)
@@ -109,8 +109,7 @@ class WXTokenApi {
         })
     }
 
-    // 获取用户信息
-    getUserInfo(accessToken, openid, lang = 'zh_CN') {
+    getUserInfo(appId, appSecret, accessToken, openid, lang = 'zh_CN') {
         return new Promise((resolve, reject) => {
             ProxyManger.getInstance().HttpsGet({
                 path: `/cgi-bin/user/info?access_token=${accessToken}&openid=${openid}&lang=${lang}`,
@@ -127,17 +126,26 @@ class WXTokenApi {
                     res.message = "错误"
                     res.success = false
                 } else {
-                    // 判断调用是否出错
-                    if (data.errcode) {
-                        // 出错了
-                        res.message = data.errmsg
+                    if (!data.success) {
+                        res.message = data.message
                         res.success = false
                     } else {
-                        res.data = [
-                            {
-                                ...data
+                        // 判断调用是否出错
+                        if (data.data.errcode) {
+                            // 出错了
+                            res.message = `信息获取失败${data.data.errcode}:${data.data.errmsg}`
+                            res.success = false
+                            if (data.data.errcode == 40001) {
+                                // 获取失败，可能是access_token被访问了，失效了
+                                CacheManger.Instance().clearWithKey(`${appId}_${appSecret}_wxToken`)
                             }
-                        ]
+                        } else {
+                            res.data = [
+                                {
+                                    ...data.data
+                                }
+                            ]
+                        }
                     }
                 }
                 resolve(res)
@@ -145,7 +153,6 @@ class WXTokenApi {
         })
     }
 
-    // 获取ticket
     getTicket(access_token, expires) {
         return new Promise((resolve, reject) => {
             let ticket = CacheManger.Instance().get('wxTicket')
