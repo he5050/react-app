@@ -15,7 +15,7 @@ const logger = store => next => action => {
 // 测试 用于捕获异常
 const crashReporter = store => next => action => {
     try {
-        return next(action);
+        return next(action)
     } catch (err) {
         console.error('Caught an exception:[', err, ']')
         console.error('Action:[', action, ']')
